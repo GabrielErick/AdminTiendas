@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8d8f6490-f3e5-49e5-9754-490ceaecf73e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="cveDocSae" class="java.lang.String">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 
+	--EMCABEZADO
+       A.CVE_DOC_SAE
+      ,A.CVE_PROVEEDOR
+      ,ISNULL(D.NOMBRE,'') AS NOMBRE  
+      ,ISNULL(D.CALLE, '') AS CALLE
+      ,A.SOLICITA
+      ,A.ENTREGAR_A
+      ,E.DESCRIPCION
+      ,A.FECHA_DOC
+      --DETALLE
+      ,B.CVE_ART
+      ,C.DESCR
+      ,B.CANT
+      ,B.TOTAL
+  FROM [GTUCANAPP].[dbo].[REQUISICIONES_ENCA_APP] AS A
+  INNER JOIN [GTUCANAPP].[dbo].[REQUISICIONES_DETA_APP] AS B ON A.CVE_DOC_APP = B.REFER AND A.CVE_PROVEEDOR = B.CVE_PROVEEDOR
+  INNER JOIN [SAE5_GT].[dbo].[INVE01] AS C ON B.CVE_ART = C.CVE_ART
+  LEFT JOIN [SAE5_GT].[dbo].[PROV01] AS D ON A.CVE_PROVEEDOR = D.CLAVE
+  INNER JOIN [GTUCANAPP].[dbo].[TIENDAS] AS E ON E.NUMERO_ALMACEN = A.CVE_ALMACEN
+  WHERE A.CVE_DOC_SAE LIKE '%'+$P{cveDocSae}+'']]>
+	</queryString>
+	<field name="CVE_DOC_SAE" class="java.lang.String"/>
+	<field name="CVE_PROVEEDOR" class="java.lang.String"/>
+	<field name="NOMBRE" class="java.lang.String"/>
+	<field name="CALLE" class="java.lang.String"/>
+	<field name="SOLICITA" class="java.lang.String"/>
+	<field name="ENTREGAR_A" class="java.lang.String"/>
+	<field name="DESCRIPCION" class="java.lang.String"/>
+	<field name="FECHA_DOC" class="java.sql.Timestamp"/>
+	<field name="CVE_ART" class="java.lang.String"/>
+	<field name="DESCR" class="java.lang.String"/>
+	<field name="CANT" class="java.lang.Integer"/>
+	<field name="TOTAL" class="java.lang.Double"/>
+	<variable name="DESCRIPCION_1" class="java.lang.Integer" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{DESCRIPCION}]]></variableExpression>
+	</variable>
+	<variable name="CVE_PROVEEDOR_1" class="java.lang.Integer" resetType="Page" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{CVE_PROVEEDOR}]]></variableExpression>
+	</variable>
+	<variable name="NOMBRE_1" class="java.lang.Integer" resetType="Page" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{NOMBRE}]]></variableExpression>
+	</variable>
+	<variable name="CALLE_1" class="java.lang.Integer" resetType="Page" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{CALLE}]]></variableExpression>
+	</variable>
+	<variable name="CVE_DOC_SAE_1" class="java.lang.Integer" resetType="Page" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{CVE_DOC_SAE}]]></variableExpression>
+	</variable>
+	<variable name="FECHA_DOC_1" class="java.lang.Integer" resetType="Page" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{FECHA_DOC}]]></variableExpression>
+	</variable>
+	<variable name="SOLICITA_1" class="java.lang.Integer" resetType="Page" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{SOLICITA}]]></variableExpression>
+	</variable>
+	<variable name="ENTREGAR_A_1" class="java.lang.Integer" resetType="Page" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{ENTREGAR_A}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="0" y="14" width="555" height="39" uuid="093a0016-062e-41ec-995f-d5fe04f0b780"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DESCRIPCION}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="88" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="71" height="14" uuid="90d17ab8-8bf3-48fb-9d66-10044e61629f"/>
+				<text><![CDATA[PROVEEDOR:]]></text>
+			</staticText>
+			<textField evaluationTime="Page">
+				<reportElement x="71" y="0" width="50" height="14" uuid="ecb06c8d-e5fd-4b12-a63f-ec53bd00c85e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{CVE_PROVEEDOR}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Page">
+				<reportElement x="0" y="19" width="195" height="13" uuid="862d412d-8bb9-43d6-898b-0e52d8ee9b53"/>
+				<textFieldExpression><![CDATA[$F{NOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Page">
+				<reportElement x="0" y="37" width="195" height="14" uuid="79d242d8-b67b-4102-beb9-08650d34c445"/>
+				<textFieldExpression><![CDATA[$F{CALLE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="323" y="0" width="61" height="14" uuid="46752ef3-2daa-424e-b4c6-d5bc1eba6279"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Doc Sae]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="323" y="19" width="61" height="13" uuid="0325525d-68a5-429c-840d-4a120e04dae7"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Fecha Doc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="323" y="37" width="61" height="14" uuid="42937da4-1a35-45c9-8761-23074b549fcb"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Solicita]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="323" y="56" width="61" height="14" uuid="4b9704a1-a68c-4ebe-9e84-c652a494cd65"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Entregar a]]></text>
+			</staticText>
+			<textField evaluationTime="Page">
+				<reportElement x="384" y="0" width="171" height="14" uuid="53d50825-c962-4133-a2f4-11f322ff2153"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{CVE_DOC_SAE}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Page">
+				<reportElement x="384" y="19" width="171" height="13" uuid="6a30ea42-37ed-463a-a72f-d9aa6bc8892d"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{FECHA_DOC}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Page">
+				<reportElement x="384" y="37" width="171" height="14" uuid="607642db-adf5-4500-a988-35844d5fab6e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{SOLICITA}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Page">
+				<reportElement x="384" y="56" width="171" height="14" uuid="24fdf045-53dd-4cb5-9bf4-693820583f04"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{ENTREGAR_A}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="3" width="100" height="20" uuid="85b904d7-ef4f-4310-b92f-93cbd6623c63"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="121" y="3" width="100" height="20" uuid="175e7893-a804-46ad-b348-810660dab2ab"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Clave]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="284" y="3" width="100" height="20" uuid="69939458-b1a8-41e2-9b5f-dd5764437cf4"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="3" width="100" height="20" uuid="ffb768b3-6554-4ff3-bb0f-dee2efe77674"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="24" width="555" height="1" uuid="590d5929-a544-4337-8614-1f4800d5154b"/>
+			</line>
+			<line>
+				<reportElement x="-1" y="1" width="555" height="1" uuid="dffc1e25-2964-4906-a503-e8eef32e057b"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="16" uuid="c96074c5-063c-426c-9e40-a7d288f03b2f"/>
+				<textFieldExpression><![CDATA[$F{CANT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="121" height="16" uuid="544a7b7e-f09e-47df-ab3b-2d42c8bf45e9"/>
+				<textFieldExpression><![CDATA[$F{CVE_ART}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="0" width="215" height="16" uuid="a7bfe41d-a2c4-4008-ad1b-f9f968b3861b"/>
+				<textFieldExpression><![CDATA[$F{DESCR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="16" uuid="16891d95-b16e-4cf6-86a6-76c13ee97b06"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{TOTAL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="391" y="2" width="64" height="20" uuid="6b9332e8-bd27-4f6a-9458-53b860cfac39"/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="455" y="2" width="100" height="20" uuid="3ea5aaca-cba8-4e3c-88f8-4bb40b584a40"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{TOTAL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="78" splitType="Stretch">
+			<staticText>
+				<reportElement x="442" y="0" width="33" height="20" uuid="d1d51d5d-a99e-4a65-8888-95f348ef8e83"/>
+				<text><![CDATA[Pag]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="475" y="0" width="80" height="20" uuid="f4165880-3609-41bb-9b6d-dc4777bbba77"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="0" width="100" height="20" uuid="a0603445-690b-4091-a80f-e146f3b16089"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="142" y="1" width="12" height="20" uuid="48d0424f-2ee1-4e60-8670-bebe828d1bd4"/>
+				<text><![CDATA[F.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="154" y="15" width="230" height="1" uuid="13a237cf-ac4f-4439-b9b0-a6840c46c64e"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>
