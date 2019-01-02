@@ -19,12 +19,12 @@ public class Fechas {
         //Calendar date = null;
         Calendar fecha;
         fecha = Calendar.getInstance();
-        if(NumeroMes<10){
+        if(NumeroMes>10){
             fecha.add(Calendar.YEAR, 0);
         }else{
             fecha.add(Calendar.YEAR, -1);
         }
-        
+//        System.out.println("Año: "+formatter.format(fecha.getTime()));
         return formatter.format(fecha.getTime());
     }
     //metodo para obtener el mes actual
@@ -46,6 +46,7 @@ public class Fechas {
             default:
                 break;
         }
+//        System.out.println("Mes: "+formatter.format(fecha.getTime()));
         return formatter.format(fecha.getTime());
     }
     //metodo para obtener el primner dia del mes
@@ -58,6 +59,7 @@ public class Fechas {
         fecha = Calendar.getInstance();
         fecha.set(a, m, 1);
         fecha.getActualMinimum(Calendar.DAY_OF_MONTH);
+//        System.out.println("Dia de inicio: "+formatter.format(fecha.getTime()));
         return formatter.format(fecha.getTime());
     }
     
@@ -71,6 +73,7 @@ public class Fechas {
         fecha = Calendar.getInstance();
         fecha.set(a, m, 0);
         fecha.getActualMinimum(Calendar.DAY_OF_MONTH);
+//        System.out.println("Dia de fin: "+formatter.format(fecha.getTime()));
         return formatter.format(fecha.getTime());
     }
 }

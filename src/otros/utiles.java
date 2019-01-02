@@ -34,7 +34,7 @@ public class utiles {
             }
         }
         almacenesPivot = almacenesPivot.substring(0,almacenesPivot.length()-1);
-//        System.out.println(almacenesPivot);
+        System.out.println(almacenesPivot);
         return almacenesPivot;
     }
     
@@ -71,6 +71,7 @@ public class utiles {
         }else{
             Fecha = formatoFecha.format(f);
         }        
+        System.out.println(Fecha);
         return Fecha;
     }
     
