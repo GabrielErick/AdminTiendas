@@ -537,10 +537,13 @@ public class Tienda extends javax.swing.JFrame {
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         try{
             var.setAlmacenP(var.getAlmacenes().get(3));
-            ut.columnasPivot(var.getAlmacenes());            
+            var.setCve_alma(16);
+            
+//            ut.columnasPivot(var.getAlmacenes(),true);            
             llenarTablas();
             jLabel1.setText("TIENDA "+var.getAlmacenP());
             this.setTitle(jLabel1.getText());
+            txtEntregarA.setText(jLabel1.getText());
         }catch(SQLException e){
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -557,10 +560,12 @@ public class Tienda extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
        try{
             var.setAlmacenP(var.getAlmacenes().get(0));
-            ut.columnasPivot(var.getAlmacenes());
+//            ut.columnasPivot(var.getAlmacenes(),true);
+            var.setCve_alma(8);
             llenarTablas();
             jLabel1.setText("TIENDA "+var.getAlmacenP());
             this.setTitle(jLabel1.getText());
+            txtEntregarA.setText(jLabel1.getText());
         }catch(SQLException e){
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -569,10 +574,12 @@ public class Tienda extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         try{
             var.setAlmacenP(var.getAlmacenes().get(1));
-            ut.columnasPivot(var.getAlmacenes());
+//            ut.columnasPivot(var.getAlmacenes(),true);
+            var.setCve_alma(15);
             llenarTablas();
             jLabel1.setText("TIENDA "+var.getAlmacenP());
             this.setTitle(jLabel1.getText());
+            txtEntregarA.setText(jLabel1.getText());
         }catch(SQLException e){
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -581,10 +588,12 @@ public class Tienda extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         try{
             var.setAlmacenP(var.getAlmacenes().get(2));
-            ut.columnasPivot(var.getAlmacenes());
+            var.setCve_alma(17);
+//            ut.columnasPivot(var.getAlmacenes(),true);
             llenarTablas();
             jLabel1.setText("TIENDA "+var.getAlmacenP());
             this.setTitle(jLabel1.getText());
+            txtEntregarA.setText(jLabel1.getText());
         }catch(SQLException e){
             JOptionPane.showMessageDialog(null, e.getMessage());
         }

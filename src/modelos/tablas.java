@@ -10,6 +10,7 @@ import forms.Tienda;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.table.DefaultTableModel;
 import otros.Fechas;
 import otros.utiles;
@@ -101,8 +102,9 @@ public class tablas{
         tbM = (DefaultTableModel)Tienda.jTable2_Requi.getModel();
         FechasTablas();
         rs = sql.StockTiendasProveedor(F1, F2, F3, F4, F5, F6, prov,TituloColumna1,TituloColumna2,TituloColumna3);
-        for(int i=1; i<rs.getMetaData().getColumnCount(); i++){            
-            tbM.addColumn(rs.getMetaData().getColumnName(i));
+        for(int i=1; i<=rs.getMetaData().getColumnCount(); i++){            
+//            System.out.println(rs.getMetaData().getColumnName(i));
+            tbM.addColumn(rs.getMetaData().getColumnName(i));            
         }        
         while(rs.next()){
             ArrayList<Object> datos = new ArrayList<>();
@@ -115,9 +117,12 @@ public class tablas{
                 }
                 
             }
+//            System.out.println(datos);
             tbM.addRow(datos.toArray());
         }
-        tbM.addColumn("Pedido");    
+        tbM.addColumn("Pedido");  
+        Tienda.jTable2_Requi.moveColumn(8, 2);
+        Tienda.jTable2_Requi.moveColumn(4,8);
         ut.ajusteColumnas(Tienda.jTable2_Requi);
     }    
     

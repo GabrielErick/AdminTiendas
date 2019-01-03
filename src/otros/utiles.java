@@ -25,12 +25,13 @@ import variables.var;
  */
 public class utiles {   
     
-    public String columnasPivot(ArrayList<String> almacenes){
+    public String columnasPivot(ArrayList<String> almacenes, Boolean proveedores){
         String almacenesPivot="["+var.getAlmacenP()+"],";
-        
-        for(int i=0; i<almacenes.size(); i++){
-            if(!var.getAlmacenP().equals(almacenes.get(i))){           
-                almacenesPivot=almacenesPivot+"["+almacenes.get(i)+"],";
+        if(!proveedores){
+            for(int i=0; i<almacenes.size(); i++){
+                if(!var.getAlmacenP().equals(almacenes.get(i))){           
+                    almacenesPivot=almacenesPivot+"["+almacenes.get(i)+"],";
+                }
             }
         }
         almacenesPivot = almacenesPivot.substring(0,almacenesPivot.length()-1);

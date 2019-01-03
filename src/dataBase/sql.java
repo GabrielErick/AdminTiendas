@@ -56,7 +56,7 @@ public class sql {
     
     public ResultSet StockTiendas ()throws SQLException{
         cts =  this.conectar("GTUCANAPP", "123", "1").prepareCall("EXEC [dbo].[STOCK_TIENDAS]"
-                                                                + "@ALMACENES =N'"+ut.columnasPivot(var.getAlmacenes())+"',"
+                                                                + "@ALMACENES =N'"+ut.columnasPivot(var.getAlmacenes(), false)+"',"
                                                                 + "@TIENDA_P =N'"+var.getAlmacenP()+"'");
         rs = cts.executeQuery();
         return rs;
@@ -73,7 +73,7 @@ public class sql {
 //        System.out.println(condP);
         cts = this.conectar("GTUCANAPP", "123", "1").prepareCall("EXEC [dbo].[STOCK_TIENDAS_PROVEEDOR]"
                                                                 +"@CLAVE_ALMACEN=N'"+var.getCve_alma()+"',"                                                                
-                                                                +"@ALMACENES_PIVOT=N'"+ut.columnasPivot(var.getAlmacenes())+"',"
+                                                                +"@ALMACENES_PIVOT=N'"+ut.columnasPivot(var.getAlmacenes(), true)+"',"
                                                                 +"@ALMA =N'"+var.getAlmacenP()+"',"                                                                
                                                                 +"@F1=N'"+f1+"',"
                                                                 +"@F2=N'"+f2+"',"
@@ -86,6 +86,7 @@ public class sql {
                                                                 +"@TITULO2=N'"+T2+"',"
                                                                 +"@TITULO3=N'"+T3+"'");
         rs = cts.executeQuery();
+        System.out.println(var.getCve_alma()+ut.columnasPivot(var.getAlmacenes(), true)+var.getAlmacenP()+" - "+f1+f2+f3+f4+f5+f6+" - "+prov+T1+T2+T3+" - "+condP);
         return rs;
     }
     
